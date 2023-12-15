@@ -49,7 +49,7 @@ function reloadTasks(a) {
 }
 function remove(div) {
   tasks = tasks.filter((i) => {
-    return !i === div.parentElement.innerText;
+    return !(i + "remove" === div.parentElement.textContent);
   });
   localStorage.setItem("tasks", `${tasks.join(",")}`);
   div.parentElement.remove();
