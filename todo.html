@@ -5,41 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>todo app</title>
     <style>
-      div {
+      body {
+        background-color: #ffecd6;
+      }
+      .maindiv {
+        color: #ffffff;
+        background-color: #607274;
         text-align: center;
         display: flex;
         flex-flow: row;
-        margin-top: 10px;
-        margin-left: 20%;
-        margin-right: 20%;
-        font-size: 1.6em;
+        width: max-content;
+        margin: 10px auto;
+        border-radius: 10px;
+        font-size: 3em;
       }
       .addbutton {
-        font-size: 1.5em;
+        font-size: 1.1em;
+        color: white;
         margin-left: 10px;
-        background-color: rgb(67, 255, 114);
-        border-radius: 20%;
+        background-color: #3559e0;
+        border-radius: 10px;
         border-style: solid;
       }
       .removebutton {
-        font-size: 1.1em;
+        color: white;
+        font-size: 0.7em;
         margin-left: 10px;
-        background-color: rgb(255, 0, 0);
-        border-radius: 20%;
+        background-color: #0f2167;
+        border-radius: 10px;
         border-style: solid;
       }
+      .removebutton:hover {
+        transform: scale(1.06);
+      }
+      .addbutton:hover {
+        transform: scale(1.06);
+      }
       .inpt {
-        font-size: 1.5em;
-        background-color: rgb(255, 252, 223);
-        border-radius: 5px;
+        font-size: inherit;
+        background-color: #eef0e5;
+        border-radius: 10px;
         border-style: solid;
         width: 400px;
-        height: 50px;
+      }
+      .header {
+        color: white;
+        background-color: #304d30;
+        width: 25em;
+        border-radius: 10px;
+        text-align: center;
+        margin: 10px auto;
+        font-size: 1.2em;
       }
     </style>
   </head>
   <body>
-    <div>
+    <div class="header">
+      <h1>Todo App <span style="font-size: 0.5em">by medhat</span></h1>
+    </div>
+    <div class="maindiv">
       <input type="text" name="task" id="inpt" class="inpt" />
       <button id="btn" class="addbutton">Add</button>
     </div>
@@ -70,7 +94,7 @@
       }
       function createTask() {
         let div = document.createElement("div");
-
+        div.classList.add("maindiv");
         let delbutn = document.createElement("button");
         let deltxt = document.createTextNode(`remove`);
         delbutn.setAttribute("onclick", "remove(this)");
@@ -85,6 +109,7 @@
 
       function reloadTasks(a) {
         let div = document.createElement("div");
+        div.classList.add("maindiv");
         let delbutn = document.createElement("button");
         let deltxt = document.createTextNode(`remove`);
         delbutn.setAttribute("onclick", "remove(this)");
