@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>todo app</title>
+    <style>
+      div {
+        text-align: center;
+        display: flex;
+        flex-flow: row;
+        margin-top: 10px;
+        margin-left: 20%;
+        margin-right: 20%;
+        font-size: 1.6em;
+      }
+      .addbutton {
+        font-size: 1.5em;
+        margin-left: 10px;
+        background-color: rgb(67, 255, 114);
+        border-radius: 20%;
+        border-style: solid;
+      }
+      .removebutton {
+        font-size: 1.1em;
+        margin-left: 10px;
+        background-color: rgb(255, 0, 0);
+        border-radius: 20%;
+        border-style: solid;
+      }
+      .inpt {
+        font-size: 1.5em;
+        background-color: rgb(255, 252, 223);
+        border-radius: 5px;
+        border-style: solid;
+        width: 400px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input type="text" name="task" id="inpt" class="inpt" />
+      <button id="btn" class="addbutton">Add</button>
+    </div>
+    <script>
+      const inpt = document.getElementById("inpt");
+      const btn = document.getElementById("btn");
+      let tasks = [];
+
+      btn.onclick = (e) => add();
+      setup();
+      function add() {
+        if (!inpt.value) {
+          return;
+        }
+        tasks.push(inpt.value);
+        localStorage.setItem("tasks", `${tasks.join(",")}`);
+        createTask();
+      }
+      function setup() {
+        if (!localStorage.getItem("tasks")) {
+          return;
+        }
+        tasks = localStorage.getItem("tasks").split(",");
+
+        for (let i = 0; i < tasks.length; i++) {
+          reloadTasks(i);
+        }
+      }
+      function createTask() {
+        let div = document.createElement("div");
+
+        let delbutn = document.createElement("button");
+        let deltxt = document.createTextNode(`remove`);
+        delbutn.setAttribute("onclick", "remove(this)");
+        delbutn.classList.add("removebutton");
+        delbutn.appendChild(deltxt);
+        let txt = document.createTextNode(`${inpt.value}`);
+        div.appendChild(txt);
+        div.appendChild(delbutn);
+        document.body.appendChild(div);
+        inpt.value = "";
+      }
+
+      function reloadTasks(a) {
+        let div = document.createElement("div");
+        let delbutn = document.createElement("button");
+        let deltxt = document.createTextNode(`remove`);
+        delbutn.setAttribute("onclick", "remove(this)");
+        delbutn.appendChild(deltxt);
+        delbutn.classList.add("removebutton");
+        let txt = document.createTextNode(`${tasks[a]}`);
+        div.appendChild(txt);
+        div.appendChild(delbutn);
+        document.body.appendChild(div);
+      }
+      function remove(div) {
+        tasks = tasks.filter((i) => {
+          return !(i + "remove" === div.parentElement.textContent);
+        });
+        localStorage.setItem("tasks", `${tasks.join(",")}`);
+        div.parentElement.remove();
+      }
+    </script>
+  </body>
+</html>
